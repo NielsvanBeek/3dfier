@@ -40,7 +40,7 @@
 #include "boost/locale.hpp"
 #include "boost/chrono.hpp"
 
-std::string VERSION = "0.8";
+std::string VERSION = "0.8.1";
 
 bool validate_yaml(const char* arg, std::set<std::string>& allowedFeatures);
 void print_license();
@@ -77,7 +77,7 @@ int main(int argc, const char * argv[]) {
       return 0;
     }
   }
-  else if (argc == 4 && (std::string)argv[2] == "-o") {
+  else if (argc == 4 && ((std::string)argv[1]).substr(((std::string)argv[1]).length()-3) == "yml" && (std::string)argv[2] == "-o") {
     filename = argv[3];
   }
   else {
@@ -316,10 +316,10 @@ int main(int argc, const char * argv[]) {
 
   //-- bye-bye
   auto duration = boost::chrono::high_resolution_clock::now() - startTime;
-  std::clog << "Successfully terminated in " 
+  std::clog << "Successfully terminated in "
     << boost::chrono::duration_cast<boost::chrono::seconds>(duration) << " || "
-    << boost::chrono::duration_cast<boost::chrono::hours>(duration).count() << ":" 
-    << boost::chrono::duration_cast<boost::chrono::minutes>(duration).count() << ":" 
+    << boost::chrono::duration_cast<boost::chrono::hours>(duration).count() << ":"
+    << boost::chrono::duration_cast<boost::chrono::minutes>(duration).count() << ":"
     << boost::chrono::duration_cast<boost::chrono::seconds>(duration).count() << std::endl;
   return 1;
 }
